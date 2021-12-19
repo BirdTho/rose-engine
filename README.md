@@ -1,6 +1,61 @@
-# Getting Started with Create React App
+# CNC Rose Engine in React
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+I initially tried using CSG geometry in ThreeJS to make a preview of what the raw stock would look like after CNC ops, but that didn't work, so I am just rendering paths much like CNCJs does.
+
+Hello visitor and fellow coders,
+
+This program is a rose engine. It is designed to help you generate traced paths, and then turn that into machine code to engrave ornate patterns into the surface of #**-=%$.
+
+You may of heard of the artwork from names like ClickSpring (my inspiration from Youtube, how he used a Rose Engine to engrace on silver for his wife for their anniversary)
+
+Built with `node v14` and `npm v6`
+
+The script is basic:
+* Run `npm install` and then `npm start`
+* Use the pattern editing on the right to add more patterns or edit patterns
+* Click in the lower left, the "orbit control" camera is extremely zoomed in. Zoom it out with scroll wheel, left click to orbit, right click to pan.
+* View preview - red is a jog move, green is a cut
+* Name the pattern on the upper left text field
+* Save as JSON to back up your work
+* You can edit the saved patterns as raw json
+* Load pattern to restore work
+* Save as GCode when you want to engrave (Only GRBL flavor)
+
+The center and top of the workpiece is 0,0,0. The pattern is to be inscribed around the center 0,0 point.
+I make no promises - check your gcode and paths before you start cutting.
+
+Uses G0 for jogging, G1 for cutting. Fixed plunge rate of 100mm/s, you can set whatever feedrate you want per-pattern.
+I don't think I have any programming regarding rpm except that it's probably hardcoded to like 10000 ot 11000 rpm
+
+## Contributing
+Yes please,
+This has so much more it could be improved, customized, ETC. Please do make pull requests. This is in TypeScript, please make your contributions in TS too.
+Don't insult the coding. This is a side project.
+
+I'm messing with 3d vectors and feel like I'm in the Matrix flying the Nebuchadnezzar around, wires hanging down everywhere.
+
+I rather like the AirBnB Style guide.
+
+You can contact me (BirdTho) via my email loveslaveofjesus@gmail.com or christopher.bird.thomas@gmail.com
+
+### Ideas
+* Project-wide plunge rate, feed rate
+* Bulk edit rose patterns
+* start/end phase could be an equation or use an easing function
+* All things could use easing functions (default is lerp presently)
+* Get better camera controls
+* Color the paths based on Z depth, so that they don't all look one color
+* Make 3d representation of cute surface (not whole surface) and (without the tool edge)
+* Support other flavors of GCode
+
+### For you to explore:
+Look at ThreeJSViewLathed.tsx if you want to see the 3d mesh generation code I was messing with.
+It uses moddedComputeFrenetFrames and ModdedParametricGeometry stuff. 
+(Parametric welding in the U and V directions as the toolpath is a torus, and Frenet frames which have their normal as always Z-up for vertical CNCing)
+
+**WARNING** **WARNING**
+CSG operations are very slow and buggy. App will lag or freeze browser tab.
+If you wanna contribute, get that feature its own Worker() instance.
 
 ## Available Scripts
 
@@ -14,11 +69,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
 ### `npm run build`
 
 Builds the app for production to the `build` folder.\
@@ -28,43 +78,3 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
