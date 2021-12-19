@@ -25,17 +25,19 @@ export default function RosePatternEditor(props: RosePatternEditorProps) {
   const keys = useMemo(() => Object.keys(wheels), [wheels]);
   const [zWheel, setZWheel] = useState(props.pattern.zWheel);
   const [startingDepth, setStartingDepth] = useState(props.pattern.startingDepth);
-  const [zMag, setZMag] = useState(props.pattern.zMag);
+  const [endingDepth, setEndingDepth] = useState(props.pattern.endingDepth);
+  const [startZMag, setStartZMag] = useState(props.pattern.startZMag);
+  const [endZMag, setEndZMag] = useState(props.pattern.endZMag);
 
   const [rWheel, setRWheel] = useState(props.pattern.rWheel);
-  const [rMag, setRMag] = useState(props.pattern.rMag);
+  const [startRMag, setStartRMag] = useState(props.pattern.startRMag);
+  const [endRMag, setEndRMag] = useState(props.pattern.endRMag);
   const [startingRadius, setStartingRadius] = useState(props.pattern.startingRadius);
   const [stepover, setStepover] = useState(props.pattern.stepover);
-  const [steps, setSteps] = useState(props.pattern.steps);
   const [endingRadius, setEndingRadius] = useState(props.pattern.endingRadius);
 
   const [startingPhase, setStartingPhase] = useState(props.pattern.startingPhase);
-  const [phaseStepover, setPhaseStepover] = useState(props.pattern.phaseStepover);
+  const [endingPhase, setEndingPhase] = useState(props.pattern.endingPhase);
 
   const [rpm, setRpm] = useState(props.pattern.rpm);
   const [speed, setSpeed] = useState(props.pattern.speed);
@@ -43,41 +45,19 @@ export default function RosePatternEditor(props: RosePatternEditorProps) {
   const [tipAngle, setTipAngle] = useState(props.pattern.tipAngle);
   const [toolDiameter, setToolDiameter] = useState(props.pattern.toolDiameter);
 
-  const updateSteps = (steps: number) => {
-    setSteps(steps);
-    setEndingRadius(startingRadius + steps * stepover);
-  };
-
-  const updateStepover = (stepover: number) => {
-    setStepover(stepover);
-    setEndingRadius(startingRadius + steps * stepover);
-  }
-
-  const updateStartingRadius = (startingRadius: number) => {
-    setStartingRadius(startingRadius);
-    setEndingRadius(startingRadius + steps * stepover);
-  }
-
-  const updateEndingRadius = (endingRadius: number) => {
-    setEndingRadius(endingRadius);
-
-    if (stepover !== 0) {
-      const newSteps = (endingRadius - startingRadius) / stepover;
-      setSteps(newSteps);
-    }
-  }
-
   const save = () => {
     const newRosePattern: RosePatternConfig = {
       zWheel,
-      zMag,
+      startRMag,
+      startZMag,
+      endRMag,
+      endZMag,
       endingRadius,
-      phaseStepover,
+      endingPhase,
+      endingDepth,
       rpm,
       rWheel,
-      rMag,
       speed,
-      steps,
       stepover,
       startingDepth,
       startingPhase,
@@ -106,36 +86,34 @@ export default function RosePatternEditor(props: RosePatternEditorProps) {
             <SelectWheel label={'Z Pattern'} value={zWheel} options={keys} setValue={setZWheel}/>
           </InputRow>
           <InputRow>
-            <NumberInput label={'Z Mag (scalar mm)'} value={zMag} onChange={setZMag} round={3}/>
+            <NumberInput label={'starting Z Mag (scalar mm)'} value={startZMag} onChange={setStartZMag} round={3}/>
+            <NumberInput label={'ending Z Mag (scalar mm)'} value={endZMag} onChange={setEndZMag} round={3}/>
           </InputRow>
           <InputRow>
             <NumberInput label={'Starting Z depth (mm)'} value={startingDepth} onChange={setStartingDepth} round={3}/>
+            <NumberInput label={'Ending Z depth (mm)'} value={endingDepth} onChange={setEndingDepth} round={3}/>
           </InputRow>
           <InputRow>
             <SelectWheel label={'R Pattern'} value={rWheel} options={keys} setValue={setRWheel}/>
           </InputRow>
           <InputRow>
-            <NumberInput label={'Radius Mag (scalar mm)'} value={rMag} onChange={setRMag} round={3}/>
+            <NumberInput label={'Starting Radius Mag (scalar mm)'} value={startRMag} onChange={setStartRMag} round={3}/>
+            <NumberInput label={'Ending Radius Mag (scalar mm)'} value={endRMag} onChange={setEndRMag} round={3}/>
           </InputRow>
           <InputRow>
-            <NumberInput label={'Starting Radius (mm)'} value={startingRadius} onChange={updateStartingRadius} round={3}/>
+            <NumberInput label={'Starting Radius (mm)'} value={startingRadius} onChange={setStartingRadius} round={3}/>
+            <NumberInput label={'Ending Radius (mm)'} value={endingRadius} onChange={setEndingRadius} round={3}/>
           </InputRow>
           <InputRow>
-            <NumberInput label={'Radius Stepover (mm/step)'} value={stepover} onChange={updateStepover} round={3}/>
+            <NumberInput label={'Radius Stepover (mm/step)'} value={stepover} onChange={setStepover} round={3}/>
           </InputRow>
         </PatternInputColumnContainer>
         <PatternInputColumnContainer style={{marginLeft: '1em', justifyContent: 'start', width: 'auto'}}>
           <InputRow>
-            <NumberInput label={'Total Radius Stepovers (steps)'} value={steps} onChange={updateSteps} round={0}/>
-          </InputRow>
-          <InputRow>
-            <NumberInput label={'Ending Radius (mm)'} value={endingRadius} onChange={updateEndingRadius} round={3}/>
-          </InputRow>
-          <InputRow>
             <NumberInput label={'Starting Phase (Θ radians)'} value={startingPhase} onChange={setStartingPhase}/>
           </InputRow>
           <InputRow>
-            <NumberInput label={'Phase Stepover (dΘ each step)'} value={phaseStepover} onChange={setPhaseStepover} round={3}/>
+            <NumberInput label={'Ending Phase (Θ radians)'} value={endingPhase} onChange={setEndingPhase}/>
           </InputRow>
           <InputRow>
             <NumberInput label={'RPM'} value={rpm} onChange={setRpm} round={3}/>

@@ -6,19 +6,20 @@ export interface RosePatternConfig {
   zWheel: string
   stepover: number // mm/step
   startingPhase: number // radians
-  phaseStepover: number // radians/step
+  endingPhase: number // radians/step
   startingRadius: number // mm
+  endingRadius: number // mm
 
   speed: number // mm/min
   rpm: number
 
   startingDepth: number // mm
+  endingDepth: number
   toolDiameter: number // mm diameter
   tipAngle: number // angle
 
-  steps: number // raw number of stepovers
-  endingRadius: number // mm
-
-  zMag: number // Max variation between highest and lowest values
-  rMag: number // Max radial variation for the wheel
+  startZMag: number // Max variation between highest and lowest values
+  endZMag: number
+  startRMag: number // Max radial variation for the wheel
+  endRMag: number
 }

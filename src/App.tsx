@@ -1,13 +1,14 @@
 import React from "react";
-import {ColumnContainer, Page, RowContainer} from "./Components/elements";
-import PreviewGraph from "./Components/PreviewGraph";
+import {Page, RowContainer} from "./Components/elements";
+//import PreviewGraph from "./Components/PreviewGraph";
 import PatternList from "./Components/PatternList";
-import ThreeJSView from "./Components/ThreeJSView";
+import ThreeJSView from "./Components/ThreeJSViewToolpaths";
 
 function App() {
   return (
     <Page>
       <RowContainer>
+        {/*<ThreeJSView/>*/}
         <ThreeJSView/>
         {/*<PreviewGraph/>*/}
         <PatternList />
