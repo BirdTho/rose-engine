@@ -27,6 +27,9 @@ I make no promises - check your gcode and paths before you start cutting.
 Uses G0 for jogging, G1 for cutting. Fixed plunge rate of 100mm/s, you can set whatever feedrate you want per-pattern.
 I don't think I have any programming regarding rpm except that it's probably hardcoded to like 10000 ot 11000 rpm
 
+![CNC pattern](test-wood-pattern.jpg)
+[(link)](saved-First%20Trial.json) JSON file that made this picture
+
 ## Contributing
 Yes please,
 This has so much more it could be improved, customized, ETC. Please do make pull requests. This is in TypeScript, please make your contributions in TS too.
