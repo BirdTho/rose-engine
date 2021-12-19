@@ -1,6 +1,6 @@
 {
   "name": "rose-engine-gcode-maker",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@react-three/drei": "^8.0.0",

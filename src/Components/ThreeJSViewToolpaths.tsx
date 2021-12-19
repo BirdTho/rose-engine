@@ -69,7 +69,7 @@ export default function ThreeJSView() {
 
   return (
     <ColumnContainer style={{width: '50%', height: '60%'}}>
-      <ColumnContainer style={{height: '200px', width: '100%', padding: '20px', gap: '10px'}}>
+      <ColumnContainer style={{height: '200px', width: '100%', padding: '20px', gap: '10px', boxSizing: "border-box"}}>
         <div>
           <label htmlFor="pattern-name-input">Pattern Name: </label>
           <input
@@ -79,14 +79,11 @@ export default function ThreeJSView() {
             onChange={(e) => setPatternName(e.target.value)}
           />
         </div>
-        <div>
-          {/*<span>Status: </span>{updating ? <span>Updating...</span> : <span>Update complete</span>}*/}
-        </div>
         <div><SaveJSON /></div>
         <div><LoadPattern/></div>
         <div><SaveToolpath/></div>
       </ColumnContainer>
-      <Canvas style={{height: (height + 'px'), width: (width + 'px')}}>
+      <Canvas style={{height: (height + 'px'), width: ((width - 8) + 'px'), border: '2px solid red'}}>
         <OrbitControls
           enablePan={true}
           enableZoom={true}
@@ -106,15 +103,6 @@ export default function ThreeJSView() {
             <lineBasicMaterial color={'#FF4444'} />
           </Line>
         ))}
-        {/*<lineSegments>*/}
-        {/*  <edgesGeometry args={[patterns[0].generatePathsLatheGeometry(), 0]}>*/}
-
-        {/*  </edgesGeometry>*/}
-        {/*  <lineBasicMaterial color={'red'}/>*/}
-        {/*</lineSegments>*/}
-        {/*{extrudes.map((extr, i) => (<mesh key={i} geometry={extr.geometry} >*/}
-        {/*  <meshPhongMaterial color={randomcolor()}/>*/}
-        {/*</mesh>))}*/}
       </Canvas>
     </ColumnContainer>
   )

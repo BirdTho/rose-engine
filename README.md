@@ -21,6 +21,11 @@ The script is basic:
 * Load pattern to restore work
 * Save as GCode when you want to engrave (Only GRBL flavor)
 
+Screenshot:
+Pattern made using the "Saw 20" pattern
+![User interface](screenshot.jpeg)
+
+
 The center and top of the workpiece is 0,0,0. The pattern is to be inscribed around the center 0,0 point.
 I make no promises - check your gcode and paths before you start cutting.
 
@@ -29,6 +34,10 @@ I don't think I have any programming regarding rpm except that it's probably har
 
 ![CNC pattern](test-wood-pattern.jpg)
 [(link)](saved-First%20Trial.json) JSON file that made this picture
+[(gcode)](FirstTrial.gcode) that carved it
+* Features a .1mm stepover
+
+So what separates this program from a traditional CAD, is that rather than come up with a mesh and cut it using raster or spiral means, the GCode path follows the shape and contour of the cut. It's sorta spiralized, but it actually follows the shape of the patterns
 
 ## Contributing
 Yes please,
@@ -50,6 +59,14 @@ You can contact me (BirdTho) via my email loveslaveofjesus@gmail.com or christop
 * Color the paths based on Z depth, so that they don't all look one color
 * Make 3d representation of cute surface (not whole surface) and (without the tool edge)
 * Support other flavors of GCode
+* Use movement tangent to adjust feed rate by taking the upward/downward component into account and blending horizontal feedrate with vertical plunge rate.
+* Reversible direction of cutting (Climb vs conventional. This only cuts counterclockwise because that is what happens when you sweep theta from 0 - 360.)
+* More patterns, richer pattern system
+
+### Adding patterns
+All patterns are in `src/rose/wheels.ts`
+They all take the form of an equation:
+`(theta: number) => number` with 0 <= theta <= 2PI and the output being in the range [0, 1], preferrably where f(0) === f(2PI) so the pattern can tile. See code for examples.  
 
 ### For you to explore:
 Look at ThreeJSViewLathed.tsx if you want to see the 3d mesh generation code I was messing with.
